@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geopol Mallas | Mallas Técnicas para Entornos Exigentes</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #0B3D0B;
+  --green-main: #1A6B1A;
+  --green-bright: #2ECC40;
+  --green-accent: #00E676;
+  --green-light: #E8F5E9;
+  --cream: #F5F2EB;
+  --dark: #111;
+  --text: #2D2D2D;
+  --text-light: #6B6B6B;
+  --white: #fff;
+  --card-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  --card-hover: 0 8px 40px rgba(0,0,0,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(11, 61, 11, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(46, 204, 64, 0.15);
+  transition: all 0.3s ease;
+}
+
+.nav-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+  color: var(--green-accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.nav-links a:hover { color: var(--green-accent); }
+
+.nav-cta {
+  background: var(--green-accent) !important;
+  color: var(--green-deep) !important;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  font-weight: 700 !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 230, 118, 0.4);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: var(--green-deep);
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(46, 204, 64, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(0, 230, 118, 0.08) 0%, transparent 50%);
+}
+
+.hero-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(46, 204, 64, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 204, 64, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.hero-content {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1.5px;
+}
+
+.hero-text h1 .accent {
+  color: var(--green-accent);
+  display: block;
+}
+
+.hero-text p {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(46, 204, 64, 0.1);
+  border: 1px solid rgba(46, 204, 64, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  color: var(--green-accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: 'Outfit', sans-serif;
+}
+
+.hero-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--green-accent);
+  color: var(--green-deep);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 230, 118, 0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--green-accent);
+  color: var(--green-accent);
+}
+
+.hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.2s; }
+.stat-card:nth-child(2) { animation-delay: 0.4s; }
+.stat-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--green-accent);
+  line-height: 1;
+}
+
+.stat-label {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+/* ===== SECTORS ===== */
+.sectors {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  display: inline-block;
+  background: rgba(46, 204, 64, 0.1);
+  color: var(--green-main);
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.sector-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: default;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.sector-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-hover);
+}
+
+.sector-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--green-main), var(--green-bright));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.sector-icon svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.sector-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.8rem;
+}
+
+.sector-card p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ===== PRODUCTS ===== */
+.products {
+  padding: 6rem 2rem;
+  background: var(--white);
+}
+
+.products-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: var(--cream);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover);
+}
+
+.product-header {
+  background: var(--green-deep);
+  padding: 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(46, 204, 64, 0.2) 0%, transparent 70%);
+}
+
+.product-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  position: relative;
+}
+
+.product-sector-tag {
+  display: inline-block;
+  background: rgba(0, 230, 118, 0.15);
+  color: var(--green-accent);
+  padding: 0.2rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+.product-body {
+  padding: 1.5rem 2rem 2rem;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.product-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.spec-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.spec-chip .label {
+  color: var(--text-light);
+  font-size: 0.75rem;
+}
+
+.product-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.benefit-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--green-main);
+  font-weight: 500;
+}
+
+.benefit-tag::before {
+  content: '✓';
+  font-weight: 700;
+  font-size: 0.7rem;
+}
+
+/* ===== WHY GEOPOL ===== */
+.why {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.why-card {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.3s;
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover);
+}
+
+.why-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--green-light), rgba(46, 204, 64, 0.15));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.why-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--green-main);
+}
+
+.why-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.6rem;
+}
+
+.why-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ===== CONTACT / CTA ===== */
+.contact {
+  padding: 6rem 2rem;
+  background: var(--green-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(46, 204, 64, 0.1) 0%, transparent 50%);
+}
+
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.contact h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.contact > .contact-inner > p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.contact-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+
+.contact-card-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 230, 118, 0.15);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.contact-card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--green-accent);
+}
+
+.contact-card h4 {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.contact-card .info {
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+}
+
+.contact-card a {
+  color: var(--green-accent);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #25D366;
+  color: white;
+  padding: 1.1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #081F08;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.footer p {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+}
+
+.footer .brand {
+  color: rgba(255,255,255,0.6);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: block; }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .stat-card { flex: 1; min-width: 140px; padding: 1.5rem; }
+  .stat-number { font-size: 2rem; }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectors-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectors-grid { grid-template-columns: 1fr; }
+  .hero { padding: 5rem 1.2rem 3rem; }
+  .hero-badges { flex-direction: column; }
+  .hero-cta-group { flex-direction: column; }
+  .btn-primary, .btn-secondary { justify-content: center; }
+}
+
+/* Scroll animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#" class="nav-logo">GEOPOL <span>MALLAS</span></a>
+  <ul class="nav-links">
+    <li><a href="#sectores">Sectores</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#nosotros">¿Por qué Geopol?</a></li>
+    <li><a href="#contacto" class="nav-cta">Cotizar Ahora</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badges">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Protección UV
+        </div>
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Cero Corrosión
+        </div>
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Alta Resistencia
+        </div>
+      </div>
+      <h1>
+        Mallas técnicas para
+        <span class="accent">entornos exigentes</span>
+      </h1>
+      <p>
+        Soluciones en polietileno de alta densidad y geosintéticos para agricultura, avicultura, acuicultura y construcción. Más de 40 años blindando la inversión venezolana.
+      </p>
+      <div class="hero-cta-group">
+        <a href="https://wa.me/584242457146" target="_blank" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribir por WhatsApp
+        </a>
+        <a href="#productos" class="btn-secondary">
+          Ver Productos ↓
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">40+</div>
+        <div class="stat-label">Años de experiencia en el mercado venezolano</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">16</div>
+        <div class="stat-label">Productos técnicos especializados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Sectores productivos atendidos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="sectors reveal" id="sectores">
+  <div class="section-header">
+    <div class="section-tag">Soluciones por Sector</div>
+    <h2 class="section-title">Donde hay un productor exitoso, hay una solución Geopol</h2>
+    <p class="section-subtitle">Mallas y geosintéticos diseñados para resistir las condiciones reales de cada industria</p>
+  </div>
+  <div class="sectors-grid">
+    <div class="sector-card">
+      <div class="sector-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-10 12-10 12S2 17.5 2 12A10 10 0 0 1 12 2z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3>Agroindustrial</h3>
+      <p>Mallas sombra, mosquiteros, antipájaro, cafetaleras, cedazo y antimaleza para mejorar el microclima y elevar la calidad de café, cacao y granos.</p>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h3>Avícola y Ganadero</h3>
+      <p>Cortinas avícolas, malla pollito y mallas de cerramiento para crear espacios más frescos, seguros e higiénicos con menor estrés térmico.</p>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l3-9 6 18 3-9h4"/></svg>
+      </div>
+      <h3>Acuicultura</h3>
+      <p>Malla tejida camaronera, cedazo y antipájaro para jaulas flotantes, filtros y protección contra depredadores en ambientes acuáticos.</p>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </div>
+      <h3>Construcción y Seguridad</h3>
+      <p>Malla de balizaje, plástico ferretero y mallas de cerramiento para obras civiles, señalización temporal y delimitación de áreas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products reveal" id="productos">
+  <div class="products-inner">
+    <div class="section-header">
+      <div class="section-tag">Catálogo 2026</div>
+      <h2 class="section-title">Nuestros Productos</h2>
+      <p class="section-subtitle">Materiales de alta resistencia fabricados en HDPE con protección UV</p>
+    </div>
+    <div class="products-grid">
+
+      <!-- Malla Sombra -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Sombra o Raschel</h3>
+          <div class="product-sector-tag">Agricultura · Ganadería · Construcción</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Malla de alta resistencia en HDPE para control de radiación solar y reducción de temperatura. Disponible en 60%, 65%, 80% y 90% de sombreo.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 3.00–4.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 100 m</div>
+            <div class="spec-chip"><span class="label">Durabilidad:</span> 3 Años</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negro, Verde, Blanco</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Protección UV</span>
+            <span class="benefit-tag">Reduce temperatura</span>
+            <span class="benefit-tag">Alta durabilidad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Antiafida -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Antiáfida 40 Mesh</h3>
+          <div class="product-sector-tag">Invernaderos · Viveros · Cultivos</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Barrera física de alta precisión con monofilamentos estabilizados contra UV. Impide el ingreso de pulgones, mosca blanca y trips sin comprometer ventilación.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 4.00 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 100 m</div>
+            <div class="spec-chip"><span class="label">Densidad:</span> 40 Mesh</div>
+            <div class="spec-chip"><span class="label">Color:</span> Blanca</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Control de insectos</span>
+            <span class="benefit-tag">Reduce insecticidas</span>
+            <span class="benefit-tag">Buena ventilación</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Antimaleza -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Antimaleza (Ground Cover)</h3>
+          <div class="product-sector-tag">Viveros · Huertos · Paisajismo</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Malla en polipropileno con protección UV para control de malezas sin químicos. Estructura permeable que permite paso de agua y aire.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 4.00 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 100 m</div>
+            <div class="spec-chip"><span class="label">Peso:</span> 40 Kg</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negro</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Sin herbicidas</span>
+            <span class="benefit-tag">Alta resistencia</span>
+            <span class="benefit-tag">Permeable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cortina Avícola -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Cortina Avícola Geopol</h3>
+          <div class="product-sector-tag">Galpones · Avicultura · Ganadería</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Diseñada para controlar el ambiente interno de galpones avícolas. Fabricada en polipropileno HDPE con protección UV contra humedad y desgaste.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 2.10 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 300 m</div>
+            <div class="spec-chip"><span class="label">Peso:</span> 44.10 Kg</div>
+            <div class="spec-chip"><span class="label">Color:</span> Naranja y Verde</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Control climático</span>
+            <span class="benefit-tag">Reduce estrés térmico</span>
+            <span class="benefit-tag">Protección UV</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Pollito -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Pollito Geopol ¾"</h3>
+          <div class="product-sector-tag">Criaderos · Huertos · Acuicultura</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Barrera plástica liviana y resistente con tejido en forma de rombo. Fácil de instalar, reutilizable y adaptable a múltiples superficies.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.00–1.83 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Peso:</span> 13–15 Kg</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negra, Verde</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Versátil</span>
+            <span class="benefit-tag">Reciclable</span>
+            <span class="benefit-tag">Fácil instalación</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Pollito BOP -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Pollito BOP</h3>
+          <div class="product-sector-tag">Cultivos · Viveros · Infraestructura</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Fabricada en HDPE con protección UV. Diseñada para proteger cultivos y estructuras frente a aves, ligera y flexible.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 2.00 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 150 m</div>
+            <div class="spec-chip"><span class="label">Cuadrícula:</span> 25x30 mm</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negro</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Control de aves</span>
+            <span class="benefit-tag">No se oxida</span>
+            <span class="benefit-tag">Higiénica</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Antipájaro -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Antipájaro Geopol</h3>
+          <div class="product-sector-tag">Agricultura · Acuicultura · Industria</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Fabricada en HDPE con protección UV para proteger cultivos y viveros contra aves. Estructura ligera y flexible con apertura optimizada.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.90–2.00 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 150–300 m</div>
+            <div class="spec-chip"><span class="label">Cuadrícula:</span> 16x19 / 21x21 mm</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negro</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Evita daños por aves</span>
+            <span class="benefit-tag">Resistente al clima</span>
+            <span class="benefit-tag">Adaptable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Cedazo Cafetera -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Cedazo Cafetera</h3>
+          <div class="product-sector-tag">Café · Cacao · Stevia</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Diseñada para procesos de secado y deshidratación. Estructura abierta que permite circulación de aire para secado uniforme y eficiente.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.60 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 31 m</div>
+            <div class="spec-chip"><span class="label">Cuadrícula:</span> 3.50x4.50 mm</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negro</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Secado uniforme</span>
+            <span class="benefit-tag">Resiste altas temp.</span>
+            <span class="benefit-tag">Durabilidad exterior</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Cedazo Cacao -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Cedazo Cacao</h3>
+          <div class="product-sector-tag">Cacao · Postcosecha</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Elaborada en HDPE con protección UV para secado, volteo y manipulación del cacao. No se oxida ni degrada por humedad.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Cuadrícula:</span> 6.30x3.50 mm</div>
+            <div class="spec-chip"><span class="label">Color:</span> Verde</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Material higiénico</span>
+            <span class="benefit-tag">Fácil de limpiar</span>
+            <span class="benefit-tag">Reciclable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Cedazo Geopol -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Cedazo Geopol</h3>
+          <div class="product-sector-tag">Secado · Separación · Acuicultura</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Malla versátil en HDPE con protección UV para secado, separación y manipulación de productos. Disponible en 3 aberturas diferentes.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Modelos:</span> 01, 03, 08</div>
+            <div class="spec-chip"><span class="label">Color:</span> Verde, Gris, Negro</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Resistente al clima</span>
+            <span class="benefit-tag">Bajo mantenimiento</span>
+            <span class="benefit-tag">Versátil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Cerramiento -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla de Cerramiento Geopol</h3>
+          <div class="product-sector-tag">Residencial · Industrial · Obras</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Alternativa práctica a mallas metálicas. No se oxida, no requiere anticorrosivos. Estructura ligera y flexible para cerramientos temporales o permanentes.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.00–1.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Modelos:</span> 15x15, 15, 25, 40</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negro, Verde</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Cero corrosión</span>
+            <span class="benefit-tag">Higiénica</span>
+            <span class="benefit-tag">Duradera</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Diamante -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Diamante Plástica</h3>
+          <div class="product-sector-tag">Criaderos · Huertos · Residencial</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Polietileno extruido tipo rombo con excelente resistencia a la tensión y alta flexibilidad. Distribución uniforme de la fuerza.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.00 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Rombo:</span> 11x11 / 15x15 mm</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negra</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Alta flexibilidad</span>
+            <span class="benefit-tag">No absorbe humedad</span>
+            <span class="benefit-tag">Ligera</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Mosquitero -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Mosquitero Geopol</h3>
+          <div class="product-sector-tag">Invernaderos · Viveros · Ventilación</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Entramado técnico de 2×2 mm en HDPE. Barrera física contra insectos y plagas sin afectar circulación de aire, luz ni agua.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Peso:</span> 15 Kg</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negra</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Control de plagas</span>
+            <span class="benefit-tag">Sostenible</span>
+            <span class="benefit-tag">Protección UV</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Camaronera -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Camaronera Geopol</h3>
+          <div class="product-sector-tag">Acuicultura · Granjas Acuícolas</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Hilos de PEAD de primera calidad para aplicaciones acuícolas exigentes. Alta resistencia mecánica y estabilidad dimensional frente a presión hídrica.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 30 m</div>
+            <div class="spec-chip"><span class="label">Cuadrícula:</span> 1.5x1.4 mm</div>
+            <div class="spec-chip"><span class="label">Color:</span> Verde</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Resiste salinidad</span>
+            <span class="benefit-tag">No contamina</span>
+            <span class="benefit-tag">Fácil limpieza</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malla Balizaje -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Malla Balizaje (Delimitadora)</h3>
+          <div class="product-sector-tag">Obras · Seguridad · Señalización</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Barrera visual de alta visibilidad en naranja fluorescente con protección UV. Señalización temporal de áreas de riesgo en obras y eventos.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 1.00–1.20 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 50–60 m</div>
+            <div class="spec-chip"><span class="label">Peso:</span> 3–4 Kg</div>
+            <div class="spec-chip"><span class="label">Color:</span> Naranja</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Alta visibilidad</span>
+            <span class="benefit-tag">Reutilizable</span>
+            <span class="benefit-tag">Ligera</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plástico Ferretero -->
+      <div class="product-card">
+        <div class="product-header">
+          <h3>Plástico Negro Ferretero</h3>
+          <div class="product-sector-tag">Construcción · Agricultura · Ingeniería</div>
+        </div>
+        <div class="product-body">
+          <p class="product-description">Lámina plástica de alta resistencia de 150 micras. Barrera hidrófuga para trabajo pesado con protección frente a punción, desgarro y abrasión.</p>
+          <div class="product-specs">
+            <div class="spec-chip"><span class="label">Ancho:</span> 3.00 m</div>
+            <div class="spec-chip"><span class="label">Largo:</span> 100 m</div>
+            <div class="spec-chip"><span class="label">Espesor:</span> 150 Mci</div>
+            <div class="spec-chip"><span class="label">Color:</span> Negra</div>
+          </div>
+          <div class="product-benefits">
+            <span class="benefit-tag">Impermeable</span>
+            <span class="benefit-tag">Bloqueo UV</span>
+            <span class="benefit-tag">Larga vida útil</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY GEOPOL -->
+<section class="why reveal" id="nosotros">
+  <div class="section-header">
+    <div class="section-tag">¿Por qué elegirnos?</div>
+    <h2 class="section-title">Geopol es tu mejor aliado</h2>
+    <p class="section-subtitle">40 años de conocimiento textil, ahora en cada malla</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </div>
+      <h3>Protección UV</h3>
+      <p>Aditivos UV en todos nuestros productos que retrasan la degradación y extienden la vida útil.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Cero Corrosión</h3>
+      <p>El polietileno de alta densidad (HDPE) es inmune al óxido y químicos. Supera a cualquier malla metálica.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>Alta Resistencia</h3>
+      <p>Polímeros de alta tenacidad que mantienen su tensión sin deformarse en condiciones exigentes.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3>Rentabilidad</h3>
+      <p>Menos reemplazos y mejores resultados. Calidad que se paga sola con mayor vida útil.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div class="section-tag" style="background: rgba(0,230,118,0.15); color: #00E676;">Contáctanos</div>
+    <h2>Potencia tu Producción</h2>
+    <p style="font-size:1.1rem; color:rgba(255,255,255,0.7); margin-bottom:3rem; line-height:1.6;">Escríbenos para cotizar o recibir asesoría técnica personalizada. Estamos listos para ayudarte a elegir la solución correcta para tu proyecto.</p>
+
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h4>WhatsApp</h4>
+        <a href="https://wa.me/584242457146" target="_blank">0424-2457146</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h4>Ubicación</h4>
+        <div class="info">C.C San Ignacio<br>Torre Kepler, Piso 3</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h4>Experiencia</h4>
+        <div class="info">+40 años en el<br>mercado venezolano</div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/584242457146?text=Hola%2C%20me%20interesa%20cotizar%20productos%20Geopol%20Mallas" target="_blank" class="whatsapp-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escríbenos y Cotiza
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p><span class="brand">GEOPOL MALLAS</span> &copy; 2026 — Mallas técnicas para entornos exigentes — Venezuela</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Mobile nav
+const style = document.createElement('style');
+style.textContent = `
+  @media (max-width: 768px) {
+    .nav-links.show {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(11, 61, 11, 0.98);
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid rgba(46, 204, 64, 0.15);
+    }
+  }
+`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
